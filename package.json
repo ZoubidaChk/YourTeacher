@@ -1,0 +1,66 @@
+{
+  "name": "yourteacher",
+  "productName": "YourTeacher",
+  "version": "1.0.0",
+  "description": "YourTeacher - An offline English learning desktop application (levels A1-C1) built with Electron, SQLite and the Web Speech API.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yourteacher.app",
+    "productName": "YourTeacher",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "YourTeacher",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "database/**",
+      "renderer/**",
+      "node_modules/**",
+      "package.json"
+    ]
+  },
+  "author": "YourTeacher",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.7.5",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1"
+  }
+}
