@@ -11,6 +11,7 @@
     "build:portable": "electron-builder --win portable"
   },
   "devDependencies": {
+    "electron": "^31.7.5",
     "electron-builder": "^24.13.3"
   },
   "build": {
@@ -56,11 +57,11 @@
   },
   "author": "YourTeacher",
   "license": "MIT",
-  "devDependencies": {
-    "electron": "^31.7.5",
-    "electron-builder": "^24.13.3"
-  },
   "dependencies": {
     "better-sqlite3": "^12.11.1"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.11.1": true,
+    "electron@31.7.7": true
   }
 }
