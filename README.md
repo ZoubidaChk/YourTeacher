@@ -40,7 +40,7 @@ You need [Node.js](https://nodejs.org) 18.17 or later installed on your computer
 
 ```bash
 # Install dependencies
-cd E:\manus\YourTeacher
+cd E:\YourTeacher
 npm install
 
 # Start the app
