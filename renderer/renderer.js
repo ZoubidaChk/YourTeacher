@@ -54,7 +54,11 @@ $('#modalOverlay').addEventListener('click', (e) => {
 
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', State.dark ? 'dark' : 'light');
-  $('#themeToggle').textContent = State.dark ? '☀️' : '🌙';
+  document.body.setAttribute('data-theme', State.dark ? 'dark' : 'light');
+  const sidebarToggle = $('#themeToggle');
+  const headerToggle = $('#themeToggleHeader');
+  if (sidebarToggle) sidebarToggle.setAttribute('aria-pressed', String(State.dark));
+  if (headerToggle) headerToggle.textContent = State.dark ? '☀️' : '🌙';
   localStorage.setItem('yt-theme', State.dark ? 'dark' : 'light');
 }
 
@@ -135,9 +139,14 @@ function navigate(route, params = {}) {
 $$('.nav-item[data-route]').forEach((n) => {
   n.addEventListener('click', () => navigate(n.dataset.route));
 });
-$('#themeToggle').addEventListener('click', () => {
+function toggleTheme() {
   State.dark = !State.dark;
   applyTheme();
+}
+$('#themeToggle').addEventListener('click', toggleTheme);
+$('#themeToggleHeader').addEventListener('click', toggleTheme);
+$('#themeToggle').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
 });
 
 // ============================================================

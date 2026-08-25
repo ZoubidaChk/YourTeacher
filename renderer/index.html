@@ -11,41 +11,44 @@
    clean typography, full dark/light support
    ============================================================ */
 :root {
-  --bg: #f7f8fa;
+  --bg: #f7f8fc;
   --bg-panel: #ffffff;
   --bg-elevated: #ffffff;
-  --text: #1d2129;
-  --text-muted: #6b7280;
-  --border: #e5e7eb;
-  --primary: #58cc02;          /* Duolingo green */
-  --primary-dark: #46a302;
-  --primary-soft: rgba(88,204,2,0.12);
-  --accent: #1cb0f6;           /* bright blue */
-  --accent-soft: rgba(28,176,246,0.12);
-  --danger: #ff4b4b;
-  --danger-soft: rgba(255,75,75,0.12);
-  --warning: #ffc800;
-  --purple: #ce82ff;
-  --purple-soft: rgba(206,130,255,0.12);
-  --orange: #ff9600;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 8px rgba(16,24,40,0.06);
-  --shadow-lg: 0 12px 40px rgba(16,24,40,0.12);
+  --text: #2d3436;
+  --text-muted: #636e72;
+  --border: #e9ecef;
+  --primary: #a29bfe;
+  --primary-dark: #6c5ce7;
+  --primary-soft: #efedff;
+  --accent: #55efc4;
+  --accent-dark: #00b894;
+  --accent-soft: #e3faf3;
+  --danger: #ff7675;
+  --danger-soft: #ffeaea;
+  --warning: #fdcb6e;
+  --purple: #a29bfe;
+  --purple-soft: #efedff;
+  --orange: #e17055;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow: 0 4px 14px rgba(45,52,54,0.07);
+  --shadow-lg: 0 14px 34px rgba(108,92,231,0.14);
   --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --header-h: 64px;
+  --header-h: 68px;
   --sidebar-w: 250px;
 }
 
 [data-theme="dark"] {
-  --bg: #0f1117;
-  --bg-panel: #1a1d27;
-  --bg-elevated: #232734;
-  --text: #e8eaef;
-  --text-muted: #9aa1b2;
-  --border: #2d3242;
-  --shadow: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  --bg: #151625;
+  --bg-panel: #202235;
+  --bg-elevated: #292c43;
+  --text: #f1f1f5;
+  --text-muted: #a7a9bd;
+  --border: #363a55;
+  --primary-soft: #302d55;
+  --accent-soft: #203c39;
+  --shadow: 0 4px 14px rgba(0,0,0,0.32);
+  --shadow-lg: 0 14px 34px rgba(0,0,0,0.5);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -140,14 +143,23 @@ nav.sidebar {
 .nav-item:hover { background: var(--bg); color: var(--text); }
 .nav-item.active {
   background: var(--primary-soft); color: var(--primary-dark);
-  border-color: rgba(88,204,2,0.3);
+  border-color: rgba(162,155,254,0.45);
+  box-shadow: 0 3px 8px rgba(162,155,254,0.12);
 }
 [data-theme="dark"] .nav-item.active { color: var(--primary); }
 .nav-item .ico { font-size: 20px; width: 26px; text-align: center; }
 .nav-spacer { flex: 1; }
 .nav-secondary { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px; }
+.theme-switch-container { border-top: 1px solid var(--border); margin-top: 10px; padding: 16px 12px 4px; }
+.theme-label { color: var(--text-muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .7px; margin-bottom: 9px; }
+.theme-switch { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 10px; border:1px solid var(--border); border-radius:999px; background:var(--bg); cursor:pointer; }
+.theme-switch .theme-icons { display:flex; gap:7px; font-size:16px; }
+.theme-switch .switch-track { width:40px; height:22px; border-radius:999px; background:#dfe6e9; position:relative; transition:.2s; }
+.theme-switch .switch-track::after { content:''; position:absolute; top:3px; left:3px; width:16px; height:16px; border-radius:50%; background:#fff; transition:.2s; box-shadow:0 1px 4px #0002; }
+[data-theme="dark"] .theme-switch .switch-track { background:var(--primary); }
+[data-theme="dark"] .theme-switch .switch-track::after { transform:translateX(18px); }
 
-section.content { flex: 1; overflow-y: auto; padding: 28px 34px; }
+section.content { flex: 1; overflow-y: auto; padding: 30px 34px; background: var(--bg); }
 section.content::-webkit-scrollbar { width: 8px; }
 section.content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
@@ -504,7 +516,7 @@ h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
   <!-- Header -->
   <header class="app-header">
     <div class="logo">
-      <div class="logo-badge">Y</div>
+      <div class="logo-badge"><img src="../icon.png" alt="YourTeacher logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
       <span>YourTeacher</span>
     </div>
     <div class="header-stats" id="headerStats">
@@ -512,7 +524,7 @@ h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
       <div class="stat-chip streak-chip"><span class="ico">🔥</span><span id="hdrStreak">0 day streak</span></div>
       <div class="stat-chip level-chip"><span class="ico">📚</span><span id="hdrLevel">A1</span></div>
     </div>
-    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+    <button class="theme-toggle" id="themeToggleHeader" title="Toggle dark mode">🌙</button>
     <div class="user-menu" id="userMenu">
       <div class="avatar" id="hdrAvatar">?</div>
       <span id="hdrName" style="font-weight:700;font-size:14px;"></span>
@@ -533,6 +545,12 @@ h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
         <div class="nav-item" id="navSwitch"><span class="ico">👤</span>Switch User</div>
       </div>
       <div class="nav-spacer"></div>
+      <div class="theme-switch-container">
+        <div class="theme-label">Dark mode</div>
+        <div class="theme-switch" id="themeToggle" role="button" tabindex="0" aria-label="Toggle dark mode">
+          <span class="theme-icons">☀️ 🌙</span><span class="switch-track"></span>
+        </div>
+      </div>
     </nav>
 
     <!-- Content -->
@@ -545,6 +563,7 @@ h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
 <!-- Onboarding overlay -->
 <div class="modal-overlay" id="onboardingOverlay">
   <div class="card onboarding">
+    <img src="../icon.png" alt="YourTeacher logo" style="width:76px;height:76px;object-fit:cover;border-radius:20px;margin:0 auto 16px;display:block;">
     <h1>Welcome to YourTeacher</h1>
     <p>Your offline English coach for levels A1 to C1. Let's set up your profile.</p>
     <input class="form-input" id="obName" placeholder="What's your name?" maxlength="30">
