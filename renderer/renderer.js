@@ -3,9 +3,8 @@
    Vanilla JS: routing, state, quizzes, games, speech, writing lab
    ============================================================ */
 
-// ============================================================
+
 // STATE
-// ============================================================
 const State = {
   user: null,
   users: [],
@@ -23,9 +22,9 @@ const UNLOCK_SCORE = 70;
 const XP_PER_LESSON = 20;
 const XP_PER_QUIZ_BASE = 30;
 
-// ============================================================
+
 // UTILS
-// ============================================================
+
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -122,9 +121,8 @@ function refreshHeader() {
   $('#hdrAvatar').textContent = (State.user.name || '?')[0].toUpperCase();
 }
 
-// ============================================================
 // ROUTER
-// ============================================================
+
 function navigate(route, params = {}) {
   State.route = route;
   State.params = params;
