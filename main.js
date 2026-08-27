@@ -1,10 +1,11 @@
 /* 
-   YourTeacher - Electron Main Process
-   - BrowserWindow lifecycle
+    YourTeacher - Electron Main Process 
    - SQLite database initialization (better-sqlite3)
-   - IPC handlers for all data operations
-   - Progress report export via file dialog */
-
+   
+/* Main Process: The core Electron entry point.
+It manages the application lifecycle, creates the native window instances,
+and handles privileged system operations via IPC (Inter-Process Communication).
+*/
 
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
