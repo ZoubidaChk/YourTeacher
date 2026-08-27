@@ -1,5 +1,9 @@
 /* YourTeacher - Database Schema & Seed Data (A1 -> C1) */
 
+/*          Data Layer: Contains the SQLite initialization scripts and the comprehensive A1-C1 curriculum seed data.
+            It manages the persistent storage of user profiles, progress tracking, and educational content.
+*/
+
 const SCHEMA_SQL = `
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
