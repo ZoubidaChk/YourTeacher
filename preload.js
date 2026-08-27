@@ -1,7 +1,11 @@
-/* ============================================================
-   YourTeacher - Preload Script
-   Exposes a safe, narrow API surface to the renderer process
-   ============================================================ */
+/* /**
+ * YourTeacher - Preload Script
+ * 
+ * This module acts as a secure context bridge between the Main and Renderer processes.
+ * It exposes a restricted API surface to the frontend to enable IPC communication
+  for database operations, user management, and curriculum retrieval.
+ */
+
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
