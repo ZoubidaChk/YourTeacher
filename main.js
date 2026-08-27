@@ -1,10 +1,11 @@
-/* ============================================================
+/* 
    YourTeacher - Electron Main Process
    - BrowserWindow lifecycle
    - SQLite database initialization (better-sqlite3)
    - IPC handlers for all data operations
-   - Progress report export via file dialog
-   ============================================================ */
+   - Progress report export via file dialog */
+
+
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
@@ -18,9 +19,6 @@ const {
   SEED_GAMES
 } = require('./database/init');
 
-// -----------------------------------------------------------
-// Window
-// -----------------------------------------------------------
 let mainWindow = null;
 
 function createWindow() {
@@ -42,9 +40,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 }
 
-// -----------------------------------------------------------
 // Database
-// -----------------------------------------------------------
 let db = null;
 
 function getDb() {
@@ -101,9 +97,8 @@ function initDb() {
   }
 }
 
-// -----------------------------------------------------------
-// IPC: Levels & Units
-// -----------------------------------------------------------
+// Levels & Units
+
 ipcMain.handle('getLevels', () => getDb().prepare('SELECT * FROM levels ORDER BY id').all());
 
 ipcMain.handle('getUnits', (_e, levelCode) => {
@@ -113,9 +108,9 @@ ipcMain.handle('getUnits', (_e, levelCode) => {
   return db.prepare('SELECT * FROM units WHERE level_id = ? ORDER BY unit_number').all(level.id);
 });
 
-// -----------------------------------------------------------
-// IPC: Lessons
-// -----------------------------------------------------------
+
+// Lessons
+
 ipcMain.handle('getLessons', (_e, unitId) =>
   getDb().prepare('SELECT * FROM lessons WHERE unit_id = ? ORDER BY type').all(unitId)
 );
@@ -124,23 +119,18 @@ ipcMain.handle('getLesson', (_e, lessonId) =>
   getDb().prepare('SELECT * FROM lessons WHERE id = ?').get(lessonId)
 );
 
-// -----------------------------------------------------------
-// IPC: Quiz
-// -----------------------------------------------------------
+//Quiz
+
 ipcMain.handle('getQuiz', (_e, unitId) =>
   getDb().prepare('SELECT * FROM quiz_questions WHERE unit_id = ?').all(unitId)
 );
 
-// -----------------------------------------------------------
-// IPC: Games
-// -----------------------------------------------------------
+// Games
 ipcMain.handle('getGame', (_e, unitId, gameType) =>
   getDb().prepare('SELECT * FROM games WHERE unit_id = ? AND game_type = ?').get(unitId, gameType)
 );
 
-// -----------------------------------------------------------
-// IPC: Users
-// -----------------------------------------------------------
+// Users
 ipcMain.handle('getUsers', () => getDb().prepare('SELECT * FROM users').all());
 
 ipcMain.handle('createUser', (_e, { name, level }) =>
@@ -250,9 +240,8 @@ ipcMain.handle('exportProgressReport', async (_e, { userId }) => {
   return { success: true, filePath };
 });
 
-// -----------------------------------------------------------
+
 // Lifecycle
-// -----------------------------------------------------------
 app.whenReady().then(() => {
   getDb(); // initialize DB on startup
   createWindow();
